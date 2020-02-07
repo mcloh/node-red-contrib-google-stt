@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('google-speech-text',{
-        category: '🔉_audio',
-        color: '#f9c6c3',
+        category: 'google',
+        color: 'rgb(153, 204, 255)',
         defaults: { 
             name:        { value: undefined },
             auth:        { value: undefined, type: 'google-service-account', required: true },
@@ -38,7 +38,7 @@
         },
         inputs:  1,
         outputs: 1,
-        icon: "gcc.png",
+        icon: "google.svg",
         align: "left",
         paletteLabel: 'Speech',
         label: function() { return this.name || "Google Speech"; },
