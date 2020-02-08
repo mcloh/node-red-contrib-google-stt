@@ -1,4 +1,5 @@
 const fs = require('fs');
+const helper  = require('node-red-viseo-helper');
 
 // --------------------------------------------------------------------------
 //  NODE-RED
