@@ -60,7 +60,10 @@ const input = (RED, node, data, config) => {
     languageCode = (config.languageCodeType === 'msg') ? helper.getByString(data, config.languageCode) : languageCode;
     if (api === 'stt') parameters.config.languageCode = languageCode;
     else parameters.voice.languageCode = languageCode;
-    
+
+    const options = {
+      credentials: node.auth.cred
+    }
 
     // STT
     if (api === "stt") {
@@ -98,7 +101,7 @@ const input = (RED, node, data, config) => {
             }
         }
         const speech = require('@google-cloud/speech');
-        let client = new speech.v1.SpeechClient({credentials: node.auth.cred});
+        let client = new speech.v1.SpeechClient(options);
 
         client.recognize(parameters).then((results) => {
             let alternatives = (results[0] && results[0].results && results[0].results[0] && results[0].results[0].alternatives) ? results[0].results[0].alternatives : [];
@@ -141,7 +144,7 @@ const input = (RED, node, data, config) => {
         else parameters.input.text = input;
 
         const texttospeech = require('@google-cloud/text-to-speech');
-        let client = new texttospeech.v1beta1.TextToSpeechClient({credentials: node.auth.cred});
+        let client = new texttospeech.TextToSpeechClient(options);
         let res = { audioContent: [] }
         
         client.synthesizeSpeech(parameters)
