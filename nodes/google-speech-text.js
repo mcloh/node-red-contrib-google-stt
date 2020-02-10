@@ -1,6 +1,9 @@
 const fs = require('fs');
 const helper  = require('node-red-viseo-helper');
 
+// Fix for protobufjs
+window.process = process;
+
 // --------------------------------------------------------------------------
 //  NODE-RED
 // --------------------------------------------------------------------------
