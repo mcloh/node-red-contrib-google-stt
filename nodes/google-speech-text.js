@@ -1,8 +1,13 @@
 const fs = require('fs');
 const helper  = require('node-red-viseo-helper');
 
-// Fix for protobufjs
-window.process = process;
+// Fix for protobufjs which seems are dead...
+try {
+  window.process = process;
+}
+catch(err) {
+  console.log('There is no window, please report to my github is this node dont work correctly');
+}
 
 // --------------------------------------------------------------------------
 //  NODE-RED
