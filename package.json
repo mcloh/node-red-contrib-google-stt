@@ -1,24 +1,22 @@
 {
-    "name": "node-red-contrib-google-stt",
-    "version": "0.0.4",
-    "description": "Google STT/TTS",
+    "name": "node-red-contrib-google-stt-long",
+    "version": "0.0.5",
+    "description": "Google STT",
     "dependencies": {
         "@google-cloud/speech": "~3.4.0",
-        "@google-cloud/text-to-speech": "~1.4.1",
         "googleapis": "~47.0.0",
         "node-red-viseo-helper": "~0.3.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/sboily/node-red-contrib-google-stt"
+        "url": "https://github.com/mcloh/node-red-contrib-google-stt"
     },
     "license": "Apache-2.0",
     "keywords": [
         "node-red",
         "google",
         "speech",
-        "stt",
-        "tts"
+        "stt"
     ],
     "node-red": {
         "nodes": {
