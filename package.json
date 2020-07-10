@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/mcloh/node-red-contrib-google-stt"
+        "url": "https://github.com/mcloh/node-red-contrib-google-stt-long"
     },
     "license": "Apache-2.0",
     "keywords": [
