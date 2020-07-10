@@ -64,7 +64,7 @@ const input = (RED, node, data, config) => {
     if (api === 'stt') parameters.config.sampleRateHertz = Number(sampleRateHertz);
     else parameters.audioConfig.sampleRateHertz = Number(sampleRateHertz);
     
-    let languageCode = config.languageCode || 'fr-FR';
+    let languageCode = config.languageCode || 'en-US';
     languageCode = (config.languageCodeType === 'msg') ? helper.getByString(data, config.languageCode) : languageCode;
     if (api === 'stt') parameters.config.languageCode = languageCode;
     else parameters.voice.languageCode = languageCode;
@@ -94,6 +94,30 @@ const input = (RED, node, data, config) => {
         if (typeof enableWordTimeOffsets === 'string') parameters.config.enableWordTimeOffsets = (enableWordTimeOffsets === 'true') ? true : false;
         else parameters.config.enableWordTimeOffsets = enableWordTimeOffsets;
 
+/* BEGIN OF
+enableSpeakerDiarization: true,
+diarizationSpeakerCount: 2,
+model: 'phone_call',
+*/
+        let enableSpeakerDiarization = (config.enableSpeakerDiarization === 'msg') ? helper.getByString(data, config.enableSpeakerDiarization) : config.enableSpeakerDiarization;
+        if (typeof enableSpeakerDiarization === 'string') parameters.enableSpeakerDiarization = (enableSpeakerDiarization === 'true') ? true : false;
+        else parameters.enableSpeakerDiarization = enableSpeakerDiarization;
+    
+        let diarizationSpeakerCount = config.diarizationSpeakerCount || '2';
+        diarizationSpeakerCount = (config.diarizationSpeakerCount === 'msg') ? helper.getByString(data, config.diarizationSpeakerCount) : diarizationSpeakerCount;
+        if (api === 'stt') parameters.diarizationSpeakerCount = Number(diarizationSpeakerCount);
+        else parameters.diarizationSpeakerCount = Number(diarizationSpeakerCount);
+
+        let model = config.model || 'phone_call';
+        model = (config.model === 'msg') ? helper.getByString(data, config.model) : encoding;
+        if (api === 'stt') parameters.model = model;
+        else parameters.model = model;
+/* END OF
+enableSpeakerDiarization: true,
+diarizationSpeakerCount: 2,
+model: 'phone_call',
+*/
+      
         let type = config.intype;
         if (type === 'url') parameters.audio.uri = input;
         else if (type === 'content') parameters.audio.content = input;
@@ -111,7 +135,7 @@ const input = (RED, node, data, config) => {
         const speech = require('@google-cloud/speech');
         let client = new speech.v1.SpeechClient(options);
 
-        client.recognize(parameters).then((results) => {
+        client.longRunningRecognize(parameters).then((results) => {
             let alternatives = (results[0] && results[0].results && results[0].results[0] && results[0].results[0].alternatives) ? results[0].results[0].alternatives : [];
             helper.setByString(data, config.output || 'payload', { alternatives: alternatives });
             node.send(data);
