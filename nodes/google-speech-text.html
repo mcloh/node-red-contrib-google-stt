@@ -57,6 +57,10 @@
             $("#node-input-speechContexts").typedInput({ default: 'json', types: ['msg','json'], typeField: $("#node-input-speechContextsType") });
             $("#node-input-enableWordTimeOffsets").typedInput({ default: 'bool', types: ['msg','bool'], typeField: $("#node-input-enableWordTimeOffsetsType") });
 
+            $("#node-input-enableSpeakerDiarization").typedInput({ default: 'bool', types: ['msg','bool'], typeField: $("#node-input-enableSpeakerDiarizationType") });
+            $("#node-input-diarizationSpeakerCount").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-diarizationSpeakerCountType") });
+            $("#node-input-model").typedInput({ default: 'str', types: ['msg','str'], typeField: $("#node-input-modelType") });
+            
             $("#node-input-speakingRate").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-speakingRateType") });
             $("#node-input-pitch").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-pitchType") });
             $("#node-input-volumeGainDb").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-volumeGainDbType") });
@@ -69,6 +73,7 @@
                     $('.stt').show();
                     $("#node-input-maxAlternatives, #node-input-profanityFilter").typedInput('show');
                     $("#node-input-speechContexts, #node-input-enableWordTimeOffsets").typedInput('show');
+                    $("#node-input-enableSpeakerDiarization, #node-input-diarizationSpeakerCount, #node-input-model").typedInput('show');
                 }
                 else {
                     $('.tts').show();
@@ -195,6 +200,22 @@
         <input type="hidden" id="node-input-enableWordTimeOffsetsType">
     </div>
 
+    <div class="form-row stt">
+        <label for="node-input-enableSpeakerDiarization" style="margin-left:15px; width: 110px; color:#848484"> Speaker Diarization</label>
+        <input type="text"   id="node-input-enableSpeakerDiarization" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-enableSpeakerDiarizationType">
+    </div>
+    <div class="form-row stt">
+        <label for="node-input-diarizationSpeakerCount" style="margin-left:15px; width: 110px; color:#848484"> Speaker Count</label>
+        <input type="text"   id="node-input-diarizationSpeakerCount" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-diarizationSpeakerCountType">
+    </div>
+    <div class="form-row stt">
+        <label for="node-input-model" style="margin-left:15px; width: 110px; color:#848484"> Model</label>
+        <input type="text"   id="node-input-model" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-modelType">
+    </div>
+
     <div style="margin-left: 15px; margin-right: 0px; width: 85px; height: 1px; background-color: lightgrey; display:inline-block;"></div><!--
     --><div style="margin-left: 0px;  margin-right: 0px; width: 70%;  height: 1px; background-color: lightgrey; display:inline-block;"></div>
     <br><br>
@@ -263,6 +284,13 @@
         <dd>a means to provide context to assist the speech recognition - array of { "phrases": [ string ] } objects</dd>
         <dt>Word time offsets <span class="property-type">boolean</span></dt>
         <dd>if true, the top result includes a list of words and the start and end time offsets (timestamps) for those words</dd>
+
+        <dt>Speaker Diarization <span class="property-type">boolean</span></dt>
+        <dd>if true, Speech-to-Text attempts to distinguish the different voices included in the audio sample.</dd>
+        <dt>Speaker Count <span class="property-type">nnumber</span></dt>
+        <dd>the number of speakers expected to be found in the audio track (default=2)</dd>
+        <dt>Model <span class="property-type">string</span></dt>
+        <dd>set the model to one of the allowed values: video, phone_call, command_and_search, or default</dd>
     </dl> 
     <h3>References</h3>
     <ul>
